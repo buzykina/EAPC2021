@@ -1,0 +1,39 @@
+Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+int n=scanner.nextInt();
+        int[] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]= scanner.nextInt();
+        }
+        int startIndex=-1;
+        int endIndex=-1;
+        int i;
+        for (i = 1; i < n; i++) {
+            if(arr[i]<arr[i-1]){
+                //go back until you find the first occurence of arr[i-1]
+                while(arr[i-1]==arr[i-2]){
+                    i--;
+                }
+                startIndex=i-1;
+//                System.out.println(startIndex);
+                break;
+            }
+        }
+        for (int j = i; j < n; j++) {
+            if(arr[j]>arr[j-1]){
+                endIndex=j-1;
+//                System.out.println(endIndex);
+                break;
+            }
+        }
+        //reverse arr from starindex to endindex
+        while(startIndex<endIndex){
+            int temp=arr[startIndex];
+            arr[startIndex]=arr[endIndex];
+            arr[endIndex]=temp;
+            startIndex++;
+            endIndex--;
+        }
+
+        for (int j = 0; j < n; j++) {
+            System.err.print(arr[j]+" ");
+        }
